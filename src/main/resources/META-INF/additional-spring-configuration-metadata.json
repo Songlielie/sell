@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "weChat",
+      "type": "java.lang.String",
+      "description": "Description for weChat."
+  }
+] }

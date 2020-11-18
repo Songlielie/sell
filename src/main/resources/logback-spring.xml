@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread]%logger{56}.%method:%L -%d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>DENy</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </Filter>
+        <encoder>
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread]%logger{56}.%method:%L -%msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <RollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>../logs/sell/tomcat/info.%d.log</fileNamePattern>
+        </RollingPolicy>
+    </appender>
+
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </Filter>
+        <encoder>
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread]%logger{56}.%method:%L -%msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <RollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>../logs/sell/tomcat/error.%d.log</fileNamePattern>
+        </RollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+</configuration>
